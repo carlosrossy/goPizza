@@ -3,6 +3,9 @@ import { View } from 'react-native';
 import { useFonts, DMSans_400Regular } from "@expo-google-fonts/dm-sans"
 import { DMSerifDisplay_400Regular } from "@expo-google-fonts/dm-serif-display"
 import AppLoading from 'expo-app-loading';
+import { ThemeProvider } from "styled-components/native"
+
+import theme from '@src/global/theme/theme';
 
 
 export default function App() {
@@ -16,8 +19,8 @@ export default function App() {
   }
 
   return (
-    <View>
+    <ThemeProvider theme={theme}>
 
-    </View>
+    </ThemeProvider>
   );
 }
