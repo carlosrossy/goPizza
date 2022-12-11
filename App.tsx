@@ -4,7 +4,8 @@ import { DMSerifDisplay_400Regular } from "@expo-google-fonts/dm-serif-display"
 import AppLoading from 'expo-app-loading';
 import { ThemeProvider } from "styled-components/native"
 
-import theme from '@src/global/theme/theme';
+import theme from './src/global/theme/theme';
+import { SingIn } from './src/screens/SingIn';
 
 
 export default function App() {
@@ -19,7 +20,7 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-
+      <SingIn />
     </ThemeProvider>
   );
 }
