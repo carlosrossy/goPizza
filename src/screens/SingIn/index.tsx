@@ -1,13 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { KeyboardAvoidingView, Platform } from 'react-native'
 
 import BrandImg from '../../assets/brand.png'
 
 import { Button } from '../../components/Button';
 import { Input } from '../../components/Input';
+import { useAuth } from '../../hooks/auth';
 import * as S from './styles'
 
 export function SingIn() {
+    const { SingIn, islogin } = useAuth();
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+
+    function handleSingIn() {
+        SingIn(email, password)
+    }
+
     return (
         <S.Container>
 
@@ -24,11 +33,13 @@ export function SingIn() {
                         type='secundary'
                         autoCorrect={false}
                         autoCapitalize='none'
+                        onChangeText={setEmail}
                     />
                     <Input
                         placeholder='Senha'
                         type='secundary'
                         secureTextEntry
+                        onChangeText={setPassword}
                     />
 
                     <S.ForgotPasswordButton>
@@ -38,6 +49,8 @@ export function SingIn() {
                     <Button
                         title='Entrar'
                         type='secundary'
+                        onPress={handleSingIn}
+                        isLoading={islogin}
                     />
                 </S.Content>
 

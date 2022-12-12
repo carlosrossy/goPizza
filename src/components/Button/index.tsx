@@ -1,8 +1,8 @@
 import React from 'react';
-import { RectButtonProps } from 'react-native-gesture-handler';
+import { TouchableOpacityProps } from 'react-native';
 import * as S from './styles'
 
-type Props = RectButtonProps & {
+type Props = TouchableOpacityProps & {
     title: string;
     type?: S.TypeProps;
     isLoading?: boolean;
@@ -15,7 +15,7 @@ export function Button({
     ...rest
 }: Props) {
     return (
-        <S.Container type={type} enabled={!isLoading} {...rest}>
+        <S.Container type={type} {...rest}>
             {isLoading ? <S.Load /> : <S.Title>{title}</S.Title>}
         </S.Container>
     )

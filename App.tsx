@@ -7,6 +7,7 @@ import { ThemeProvider } from "styled-components/native"
 
 import theme from './src/global/theme/theme';
 import { SingIn } from './src/screens/SingIn';
+import { AuthProvider } from './src/hooks/auth';
 
 
 export default function App() {
@@ -22,7 +23,11 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <StatusBar style='light' translucent backgroundColor='transparent' />
-      <SingIn />
+
+      <AuthProvider>
+        <SingIn />
+      </AuthProvider>
+
     </ThemeProvider>
   );
 }
