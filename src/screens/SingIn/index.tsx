@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button } from '../../components/Button';
 import { Input } from '../../components/Input';
 import * as S from './styles'
 
@@ -16,6 +17,11 @@ export function SingIn() {
                 placeholder='Senha'
                 type='secundary'
                 secureTextEntry
+            />
+
+            <Button
+                title='Entrar'
+                type='secundary'
             />
         </S.Container>
     )
