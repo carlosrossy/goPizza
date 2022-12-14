@@ -9,12 +9,16 @@ import { useAuth } from '../../hooks/auth';
 import * as S from './styles'
 
 export function SingIn() {
-    const { SingIn, islogin } = useAuth();
+    const { SingIn, islogin, forgotPassword } = useAuth();
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
     function handleSingIn() {
-        SingIn(email, password)
+        SingIn(email, password);
+    }
+
+    function handleForgotPassword() {
+        forgotPassword(email);
     }
 
     return (
@@ -42,7 +46,7 @@ export function SingIn() {
                         onChangeText={setPassword}
                     />
 
-                    <S.ForgotPasswordButton>
+                    <S.ForgotPasswordButton onPress={handleForgotPassword}>
                         <S.ForgotPasswordLabel>Esqueci minha senha</S.ForgotPasswordLabel>
                     </S.ForgotPasswordButton>
 
