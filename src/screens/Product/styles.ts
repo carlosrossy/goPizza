@@ -23,7 +23,7 @@ export const Title = styled.Text`
 
     ${({ theme }) => css`
         color: ${theme.COLORS.TITLE};
-        font-family: ${theme.FONTS.TITLE};;
+        font-family: ${theme.FONTS.TITLE};
     `};
 `;
 
@@ -32,7 +32,7 @@ export const DeleteLabel = styled.Text`
 
     ${({ theme }) => css`
         color: ${theme.COLORS.TITLE};
-        font-family: ${theme.FONTS.TEXT};;
+        font-family: ${theme.FONTS.TEXT};
     `};
 `;
 
