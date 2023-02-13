@@ -1,6 +1,8 @@
 import React from 'react';
 import * as S from './styles'
 
+//teste
+
 import { RectButtonProps } from 'react-native-gesture-handler'
 import { useTheme } from 'styled-components/native';
 import { Feather } from '@expo/vector-icons'
