@@ -12,6 +12,7 @@ import { Alert, FlatList } from 'react-native';
 
 export default function Home() {
     const [pizzas, setPizzas] = useState<ProductProps[]>([]);
+    const [search, setSearch] = useState('');
     const { COLORS } = useTheme();
 
     function fetchPizzas(value: string) {
@@ -37,6 +38,15 @@ export default function Home() {
 
     }
 
+    function handleSearch() {
+        fetchPizzas(search);
+    }
+
+    function handleSearchClear() {
+        setSearch('');
+        fetchPizzas('');
+    }
+
     useEffect(() => {
         fetchPizzas('');
     }, []);
@@ -54,7 +64,12 @@ export default function Home() {
                 </S.SingOut>
             </S.Header>
 
-            <Search onClear={() => { }} onSearch={() => { }} />
+            <Search
+                onChangeText={setSearch}
+                value={search}
+                onClear={handleSearchClear}
+                onSearch={handleSearch}
+            />
 
             <S.MenuHeader>
                 <S.Title>Cardápio</S.Title>

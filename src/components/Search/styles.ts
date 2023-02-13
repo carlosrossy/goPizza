@@ -33,7 +33,7 @@ export const ButtonClear = styled.TouchableOpacity`
     margin-right: 7px;
 `;
 
-export const Button = styled(RectButton)`
+export const Button = styled.TouchableOpacity`
     width: 52px;
     height: 52px;
     align-items: center;
