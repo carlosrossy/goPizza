@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Alert, Platform, ScrollView } from 'react-native'
 import * as S from './styles'
 import * as ImagePicker from 'expo-image-picker'
@@ -13,10 +13,19 @@ import Photo from '../../components/Photo';
 import InputPrice from '../../components/InputPrice';
 import Input from '../../components/Input';
 import { Button } from '../../components/Button';
+import { ProductProps } from '../../components/ProductCard';
 
-
+type PizzaResponse = ProductProps & {
+    photo_path: string;
+    prices_sizes: {
+        p: string;
+        m: string;
+        g: string;
+    }
+};
 
 export function Product() {
+    const [photo_path, setPhoto_path] = useState('');
     const [image, setImage] = useState('');
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
@@ -91,6 +100,26 @@ export function Product() {
 
         setIsLoading(false)
     }
+
+    useEffect(() => {
+        if (id) {
+            firestore()
+                .collection('pizzas')
+                .doc(id)
+                .get()
+                .then(response => {
+                    const product = response.data() as PizzaResponse;
+
+                    setName(product.name)
+                    setImage(product.photo_url)
+                    setDescription(product.description)
+                    setPriceSizeP(product.prices_sizes.p)
+                    setPriceSizeM(product.prices_sizes.m)
+                    setPriceSizeG(product.prices_sizes.m)
+                    setPhoto_path(product.photo_path)
+                })
+        }
+    }, [id])
 
     return (
         <S.Container behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
