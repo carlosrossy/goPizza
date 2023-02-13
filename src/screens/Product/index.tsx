@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import { Platform, ScrollView } from 'react-native'
+import { Alert, Platform, ScrollView } from 'react-native'
 import * as S from './styles'
 import * as ImagePicker from 'expo-image-picker'
+import firestore from '@react-native-firebase/firestore'
+import storage from '@react-native-firebase/storage'
 
 import ButtonBack from '../../components/ButtonBack';
 import Photo from '../../components/Photo';
@@ -36,7 +38,53 @@ export function Product() {
         }
     }
 
+    async function handleAdd() {
+        if (!name.trim()) {
+            return Alert.alert('Cadastro', 'Informe o nome da Pizza.')
 
+        }
+
+        if (!description.trim()) {
+            return Alert.alert('Cadastro', 'Informe a descrição da Pizza.')
+
+        }
+
+        if (!image) {
+            return Alert.alert('Cadastro', 'Selecione a imagem da Pizza.')
+
+        }
+
+        if (!priceSizeP || !priceSizeM || !priceSizeG) {
+            return Alert.alert('Cadastro', 'Informe o preço de todos os tamanhos de Pizza.')
+        }
+
+        setIsLoading(true);
+
+        const fileName = new Date().getTime();
+        const reference = storage().ref(`/pizzas/${fileName}.png`)
+
+        await reference.putFile(image)
+        const photo_url = await reference.getDownloadURL();
+
+        firestore()
+            .collection('pizzas')
+            .add({
+                name,
+                name_insensitive: name.toLowerCase().trim(),
+                description,
+                prices_sizes: {
+                    p: priceSizeP,
+                    m: priceSizeM,
+                    g: priceSizeG
+                },
+                photo_url,
+                photo_path: reference.fullPath
+            })
+            .then(() => Alert.alert('Cadastro', 'pizza cadastrada com sucesso'))
+            .catch(() => Alert.alert('Cadastro', 'Não foi possivel cadastrar sua pizza.'))
+
+        setIsLoading(false)
+    }
 
     return (
         <S.Container behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
@@ -108,7 +156,7 @@ export function Product() {
                         />
                     </S.InputGroup>
 
-                    <Button title='Cadastrar pizza' isLoading={isLoading} />
+                    <Button title='Cadastrar pizza' isLoading={isLoading} onPress={handleAdd} />
                 </S.Form>
 
             </ScrollView>
