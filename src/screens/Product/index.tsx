@@ -1,7 +1,11 @@
 import React from 'react';
 import { Platform } from 'react-native'
-import ButtonBack from '../../components/ButtonBack';
 import * as S from './styles'
+
+import ButtonBack from '../../components/ButtonBack';
+import Photo from '../../components/Photo';
+
+
 
 export function Product() {
     return (
@@ -16,6 +20,8 @@ export function Product() {
                     <S.DeleteLabel>Deletar</S.DeleteLabel>
                 </S.ButtonDelete>
             </S.Header>
+
+            <Photo uri='' />
 
         </S.Container>
     )
