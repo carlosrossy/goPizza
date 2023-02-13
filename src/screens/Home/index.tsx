@@ -22,6 +22,11 @@ export default function Home() {
             </S.Header>
 
             <Search onClear={() => { }} onSearch={() => { }} />
+
+            <S.MenuHeader>
+                <S.Title>Cardápio</S.Title>
+                <S.MenuItemsNumber>10 pizzas</S.MenuItemsNumber>
+            </S.MenuHeader>
         </S.Container>
     )
 }
