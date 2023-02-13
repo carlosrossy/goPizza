@@ -54,6 +54,10 @@ export default function Home() {
         Navigation.navigate('product', { id })
     }
 
+    function handleAdd() {
+        Navigation.navigate('product', {})
+    }
+
     useEffect(() => {
         fetchPizzas('');
     }, []);
@@ -100,6 +104,11 @@ export default function Home() {
                 }}
             />
 
+            <S.NewProductButton
+                title='Cadastrar Pizza'
+                type='secundary'
+                onPress={handleAdd}
+            />
         </S.Container>
 
     )

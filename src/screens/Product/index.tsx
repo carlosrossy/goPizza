@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Alert, Platform, ScrollView } from 'react-native'
+import { Alert, Platform, ScrollView, View } from 'react-native'
 import * as S from './styles'
 import * as ImagePicker from 'expo-image-picker'
 import firestore from '@react-native-firebase/firestore'
@@ -33,6 +33,8 @@ export function Product() {
     const [priceSizeM, setPriceSizeM] = useState('');
     const [priceSizeG, setPriceSizeG] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+
+    const { goBack } = useNavigation();
 
     const route = useRoute();
     const { id } = route.params as ProductNavigationProps;
@@ -125,23 +127,31 @@ export function Product() {
         <S.Container behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
             <ScrollView showsVerticalScrollIndicator={false}>
                 <S.Header>
-                    <ButtonBack />
+                    <ButtonBack onPress={goBack} />
 
                     <S.Title>Cadastrar</S.Title>
 
-                    <S.ButtonDelete>
-                        <S.DeleteLabel>Deletar</S.DeleteLabel>
-                    </S.ButtonDelete>
+                    {
+                        id ?
+                            <S.ButtonDelete>
+                                <S.DeleteLabel>Deletar</S.DeleteLabel>
+                            </S.ButtonDelete>
+                            : <View style={{ width: 20 }} />
+                    }
                 </S.Header>
 
                 <S.Upload>
 
                     <Photo uri={image} />
 
-                    <S.PickerImageButton
-                        onPress={handlePickerImage}
-                        title='Carregar'
-                        type='secundary' />
+                    {
+                        !id &&
+                        <S.PickerImageButton
+                            onPress={handlePickerImage}
+                            title='Carregar'
+                            type='secundary'
+                        />
+                    }
                 </S.Upload>
 
                 <S.Form>
@@ -190,8 +200,10 @@ export function Product() {
                             value={priceSizeG}
                         />
                     </S.InputGroup>
+                    {
+                        !id && <Button title='Cadastrar pizza' isLoading={isLoading} onPress={handleAdd} />
+                    }
 
-                    <Button title='Cadastrar pizza' isLoading={isLoading} onPress={handleAdd} />
                 </S.Form>
 
             </ScrollView>
