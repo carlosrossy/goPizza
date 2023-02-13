@@ -4,7 +4,7 @@ import { KeyboardAvoidingView, Platform } from 'react-native'
 import BrandImg from '../../assets/brand.png'
 
 import { Button } from '../../components/Button';
-import { Input } from '../../components/Input';
+import Input from '../../components/Input';
 import { useAuth } from '../../hooks/auth';
 import * as S from './styles'
 

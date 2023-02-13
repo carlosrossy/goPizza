@@ -9,6 +9,7 @@ import theme from './src/global/theme/theme';
 import { SingIn } from './src/screens/SingIn';
 import { AuthProvider } from './src/hooks/auth';
 import { Product } from './src/screens/Product';
+import Home from './src/screens/Home';
 
 
 export default function App() {
@@ -26,7 +27,7 @@ export default function App() {
       <StatusBar style='light' translucent backgroundColor='transparent' />
 
       <AuthProvider>
-        <Product />
+        <Home />
       </AuthProvider>
 
     </ThemeProvider>
