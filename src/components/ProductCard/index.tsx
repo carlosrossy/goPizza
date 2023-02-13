@@ -1,6 +1,8 @@
 import React from 'react';
 import * as S from './styles'
 
+//// Teste Merge
+
 import { TouchableOpacityProps } from 'react-native';
 import { useTheme } from 'styled-components/native';
 import { Feather } from '@expo/vector-icons'
