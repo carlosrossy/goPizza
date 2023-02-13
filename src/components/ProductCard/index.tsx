@@ -2,6 +2,7 @@ import React from 'react';
 import * as S from './styles'
 
 //teste
+//teste 2
 
 import { RectButtonProps } from 'react-native-gesture-handler'
 import { useTheme } from 'styled-components/native';
